@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Leggi le firme dal portale del Comune e aggiorna la pagina
         run: python3 strumenti/aggiorna_firme.py
