@@ -170,6 +170,46 @@ h3 {
 .top__nav { display: none; gap: 1.6rem; font-weight: 500; font-size: .98rem; }
 .top__nav a { text-decoration: none; padding-block: .3rem; border-bottom: 2px solid transparent; }
 .top__nav a:hover { border-bottom-color: var(--coral); }
+.top__in { position: relative; }
+.top__act { display: flex; align-items: center; gap: .75rem; flex: none; }
+
+/* menu per il telefono */
+.menu summary {
+  list-style: none; display: grid; place-items: center;
+  width: 44px; height: 44px; border: 2.5px solid var(--navy); border-radius: 50%;
+  cursor: pointer; transition: background-color .15s ease, color .15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.menu summary::-webkit-details-marker { display: none; }
+.menu__ico { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; }
+.menu__ico path { transform-box: view-box; transform-origin: 50% 50%; transition: transform .2s ease, opacity .15s ease; }
+.menu[open] summary { background: var(--navy); color: var(--cream); }
+.menu[open] .menu__l1 { transform: rotate(45deg) translateY(5px); }
+.menu[open] .menu__l2 { opacity: 0; }
+.menu[open] .menu__l3 { transform: rotate(-45deg) translateY(-5px); }
+.menu__panel {
+  position: absolute; z-index: 50; top: calc(100% + 12px);
+  left: max(20px, env(safe-area-inset-left, 0px)); right: calc(max(20px, env(safe-area-inset-right, 0px)) + 8px);
+  display: grid; padding: .5rem 1.15rem;
+  background: var(--navy); color: var(--cream);
+  border-radius: 22px; box-shadow: 8px 8px 0 var(--yellow);
+}
+.menu__panel a {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding-block: 1rem; text-decoration: none; color: inherit;
+  font-family: var(--display); font-weight: 800; font-stretch: 85%; font-size: 1.4rem; line-height: 1.1;
+  border-bottom: 1px solid rgba(255, 248, 232, .16);
+}
+.menu__panel a:last-child { border-bottom: 0; }
+.menu__panel a::after { content: "\2192"; font-family: var(--text); font-weight: 500; font-size: 1.15rem; color: var(--yellow); }
+@media (max-width: 400px) {
+  .brand { font-size: 1.02rem; gap: .5rem; }
+  .brand img { width: 40px; height: 40px; }
+  .top__act { gap: .6rem; }
+}
+@media (max-width: 345px) {
+  .brand span { display: none; }
+}
 
 /* ---------- apertura ---------- */
 
@@ -510,6 +550,7 @@ h3 {
 @media (min-width: 980px) {
   body { font-size: 1.125rem; }
   .top__nav { display: flex; }
+  .menu { display: none; }
   .hero__grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr); gap: 3rem; }
   h1 { font-size: clamp(5.4rem, 9.6vw, 8.4rem); }
   .meter { justify-self: end; }
@@ -534,6 +575,6 @@ h3 {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .ticker__track { animation: none; }
-  .btn, .btn > span[aria-hidden], .flyer, .ring__bar, .dock, .faq summary::after, .reasons li, .anim .rv { transition: none; }
+  .btn, .btn > span[aria-hidden], .menu summary, .menu__ico path, .flyer, .ring__bar, .dock, .faq summary::after, .reasons li, .anim .rv { transition: none; }
   .anim .rv { transform: none; }
 }

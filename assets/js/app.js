@@ -119,6 +119,23 @@
     });
   });
 
+  // ---- menu su telefono: si chiude scegliendo una voce, toccando fuori o con Esc ----
+  var menu = document.getElementById("menu");
+  if (menu) {
+    menu.addEventListener("click", function (e) {
+      if (e.target.closest && e.target.closest("a")) menu.open = false;
+    });
+    document.addEventListener("click", function (e) {
+      if (menu.open && !menu.contains(e.target)) menu.open = false;
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && menu.open) {
+        menu.open = false;
+        menu.querySelector("summary").focus();
+      }
+    });
+  }
+
   // ---- barra "Firma ora" su telefono ----
   var dock = document.getElementById("dock");
   var cta = document.querySelector(".hero__cta");
