@@ -149,6 +149,8 @@ h3 {
 .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--navy); }
 .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--navy); }
 .btn--big { font-size: 1.22rem; padding: .85em 1.5em; }
+.btn > span[aria-hidden] { display: inline-block; transition: transform .15s ease; }
+.btn:hover > span[aria-hidden] { transform: translateX(4px); }
 .btn--small { font-size: 1rem; padding: .5em 1.15em; box-shadow: 3px 3px 0 var(--navy); }
 .btn--ghost { background: transparent; color: var(--navy); box-shadow: none; }
 .btn--ghost:hover { background: var(--navy); color: var(--cream); box-shadow: none; transform: none; }
@@ -171,7 +173,18 @@ h3 {
 
 /* ---------- apertura ---------- */
 
-.hero { padding-block: clamp(1.4rem, 4vw, 3rem) clamp(3rem, 7vw, 5.5rem); overflow: hidden; }
+.hero { position: relative; padding-block: clamp(1.4rem, 4vw, 3rem) clamp(2.4rem, 5vw, 3.6rem); overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; top: -40px; right: -60px; width: min(520px, 70vw); height: 420px;
+  background-image: radial-gradient(var(--line-soft) 1.6px, transparent 1.7px);
+  background-size: 16px 16px;
+  -webkit-mask-image: radial-gradient(closest-side, #000 20%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 20%, transparent 100%);
+  pointer-events: none;
+}
+.hero__grid { position: relative; }
+.street { line-height: 0; background: var(--cream); }
+.street svg { display: block; width: 100%; height: clamp(170px, 19vw, 270px); }
 .hero__grid { display: grid; gap: 3.4rem; align-items: center; }
 .hero__text { min-width: 0; }
 .rule { height: 10px; background: var(--yellow); margin-block: 1.5rem 1.2rem; }
@@ -320,6 +333,10 @@ h3 {
   display: flex; flex-direction: column; gap: .7rem;
   --focus: var(--navy);
 }
+@media (hover: hover) {
+  .reasons li { transition: transform .18s ease, box-shadow .18s ease; }
+  .reasons li:hover { transform: translateY(-5px) rotate(-.5deg); box-shadow: 8px 8px 0 var(--yellow); }
+}
 .reasons .ico { width: 54px; height: 54px; padding: 13px; background: var(--yellow); border-radius: 50%; }
 .reasons p { font-size: 1.04rem; }
 .reasons small { margin-top: auto; padding-top: .3rem; font-size: .82rem; color: var(--muted); }
@@ -327,6 +344,7 @@ h3 {
 /* citazione */
 .quote { padding-block: clamp(3.2rem, 8vw, 6rem); }
 .quote blockquote { position: relative; padding-left: clamp(1.4rem, 5vw, 3rem); border-left: 10px solid var(--yellow); max-width: 58rem; }
+.quote blockquote::before { content: "\201C"; display: block; height: .42em; font-family: var(--display); font-weight: 800; font-size: clamp(6rem, 16vw, 10rem); line-height: .8; color: var(--coral); }
 .quote p { font-family: var(--display); font-weight: 800; font-stretch: 82%; font-size: clamp(1.9rem, 6vw, 3.4rem); line-height: 1.04; letter-spacing: -.01em; text-wrap: balance; }
 .quote footer { margin-top: 1.1rem; font-weight: 700; font-size: .82rem; letter-spacing: .16em; text-transform: uppercase; color: var(--coral-deep); }
 
@@ -447,7 +465,13 @@ h3 {
 .foot ul { display: grid; gap: .45rem; }
 .foot a { text-underline-offset: 3px; }
 .foot .copied { color: var(--yellow); min-height: 0; margin-top: .4rem; }
-.foot__low { margin-top: 2.2rem; padding-top: 1.2rem; border-top: 1px solid #1F3B55; font-size: .88rem; }
+.foot__mark {
+  margin-top: 2.6rem; padding-inline: max(20px, env(safe-area-inset-left, 0px));
+  font-family: var(--display); font-weight: 800; font-stretch: 75%; text-transform: uppercase;
+  font-size: clamp(2.6rem, 12.6vw, 12rem); line-height: .82; letter-spacing: -.012em; white-space: nowrap; overflow: hidden;
+  color: #16344D; text-align: center;
+}
+.foot__low { margin-top: 1.4rem; padding-top: 1.2rem; border-top: 1px solid #1F3B55; font-size: .88rem; }
 
 /* barra fissa su telefono */
 .dock {
@@ -467,6 +491,10 @@ h3 {
 .dock p { font-size: 1rem; }
 .dock strong { font-family: var(--display); font-weight: 800; font-size: 1.3rem; color: var(--yellow); }
 .dock .btn { border-color: var(--cream); box-shadow: none; }
+
+/* comparsa allo scorrimento (attivata da app.js): piccolo spostamento, mai testo invisibile */
+.anim .rv { transform: translateY(22px); transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.anim .rv.in { transform: none; }
 
 /* ---------- da tablet in su ---------- */
 
@@ -493,12 +521,19 @@ h3 {
   .faq { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 4rem; }
   .final__grid { grid-template-columns: minmax(0, 1.4fr) minmax(0, .6fr); gap: 4rem; }
   .final__bear { display: block; }
-  .dock { display: none; }
+  .dock {
+    left: auto; right: max(24px, env(safe-area-inset-right, 0px)); bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    gap: 1.1rem; padding: .55rem .6rem .55rem 1.3rem;
+    border: 2.5px solid var(--cream); border-radius: 999px;
+    box-shadow: 6px 6px 0 var(--yellow);
+    transform: translateY(180%);
+  }
   .foot { padding-bottom: 3rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .ticker__track { animation: none; }
-  .btn, .flyer, .ring__bar, .dock, .faq summary::after { transition: none; }
+  .btn, .btn > span[aria-hidden], .flyer, .ring__bar, .dock, .faq summary::after, .reasons li, .anim .rv { transition: none; }
+  .anim .rv { transform: none; }
 }

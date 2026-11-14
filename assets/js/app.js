@@ -132,6 +132,32 @@
     }, { threshold: 0 }).observe(cta);
   }
 
+  // ---- comparsa morbida allo scorrimento ----
+  var calmo = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!calmo && "IntersectionObserver" in window) {
+    var pezzi = document.querySelectorAll(".timeline li, .zeros__grid li, .story li, .spent, .reasons li, .asks li, .steps li, .signbox, .news, .faq details");
+    var occhio = new IntersectionObserver(function (voci) {
+      voci.forEach(function (v) {
+        if (!v.isIntersecting) return;
+        var el = v.target;
+        occhio.unobserve(el);
+        el.addEventListener("transitionend", function fine(e) {
+          if (e.propertyName !== "transform") return;
+          el.removeEventListener("transitionend", fine);
+          el.classList.remove("rv", "in");
+          el.style.transitionDelay = "";
+        });
+        el.classList.add("in");
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    pezzi.forEach(function (el, i) {
+      el.classList.add("rv");
+      el.style.transitionDelay = (i % 3) * 70 + "ms";
+      occhio.observe(el);
+    });
+    document.documentElement.classList.add("anim");
+  }
+
   // ---- aggiornamenti: se sono tanti, mostra i primi cinque ----
   var lista = document.getElementById("lista-aggiornamenti");
   var tutti = document.getElementById("mostra-tutti");
