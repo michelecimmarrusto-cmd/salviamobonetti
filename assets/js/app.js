@@ -21,6 +21,12 @@
   scrivi(".js-mancano", numero(mancano));
   if (aggiornato) scrivi(".js-aggiornato", aggiornato);
 
+  // obiettivo raggiunto: le frasi "ne mancano" lasciano il posto a un invito a continuare
+  if (mancano === 0) {
+    scrivi(".js-frase-contatore", "Obiettivo raggiunto!");
+    scrivi(".js-frase-finale", "Abbiamo superato le " + numero(obiettivo) + " firme. Più siamo, più contiamo: firma anche tu.");
+  }
+
   var barra = document.querySelector(".ring__bar");
   if (barra) {
     var giro = 2 * Math.PI * 104;

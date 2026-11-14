@@ -15,14 +15,14 @@ Sito informativo per la petizione "Salviamo la scuola Bonetti di via Tajani" (Mi
 
 ## Aggiornare il contatore delle firme
 
-In `index.html`, in alto, c'è questo blocco:
+Il numero si aggiorna con un comando, che lo legge dalla pagina della petizione sul portale del Comune:
 
-```html
-<div id="campagna" hidden
-     data-firme="559" data-obiettivo="1000" data-aggiornato="14 novembre 2026"
+```
+python3 strumenti/aggiorna_firme.py
 ```
 
-Basta cambiare `data-firme` e `data-aggiornato`: anello, "ne mancano" e barra in basso si aggiornano da soli.
+Il comando modifica `index.html` (numero, "ne mancano", anello e data). Poi basta pubblicare la modifica.
+Se il portale non risponde o il numero non è credibile, il comando si ferma senza toccare nulla.
 
 ## Pubblicare un aggiornamento
 
