@@ -42,11 +42,8 @@ Se gli aggiornamenti superano i cinque, i più vecchi finiscono dietro il pulsan
 
 ## Indirizzo del sito
 
-Finché il sito sta su GitHub Pages l'indirizzo è
-`https://michelecimmarrusto-cmd.github.io/salviamobonetti/`.
-
-Quando sarà collegato il dominio `salviamobonetti.it`, sostituire quell'indirizzo in `index.html`
-(righe `canonical`, `og:url`, `og:image` e `data-sito`).
+Il sito risponde su `https://salviamobonetti.it/`. Il dominio è collegato a GitHub Pages
+tramite il file `CNAME` in questa cartella: non va cancellato né rinominato.
 
 ## Regole per i testi
 
