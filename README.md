@@ -50,3 +50,7 @@ tramite il file `CNAME` in questa cartella: non va cancellato né rinominato.
 - Solo fatti che risultano dagli atti pubblici o dalla petizione, con la fonte in fondo alla pagina.
 - Nessun dato personale dei bambini o delle famiglie.
 - Il sito non usa cookie né strumenti di tracciamento.
+
+## Il video della campagna
+
+In `assets/video/` ci sono tre file: `perche-la-bonetti.mp4` (versione leggera, quella che si vede nella sezione "Il video" della pagina) e le due parti a piena qualità da scaricare per le storie (`perche-la-bonetti-parte-1.mp4` e `perche-la-bonetti-parte-2.mp4`). L'immagine di anteprima è `assets/img/video-anteprima.jpg`. Per sostituire il video basta sovrascrivere i file con lo stesso nome.

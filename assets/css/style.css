@@ -1060,3 +1060,17 @@ h1 { animation: titolo .75s var(--ease) backwards; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .anim .rv { opacity: 1; transform: none; }
 }
+
+/* ---------- il video ---------- */
+
+#video { margin-top: clamp(1.2rem, 3vw, 2rem); }
+.filmato { display: grid; gap: 1.6rem; }
+.filmato__video { display: block; justify-self: center; width: min(100%, 21rem); height: auto; aspect-ratio: 9 / 16; border: 3px solid var(--navy); border-radius: 22px; background: var(--navy); box-shadow: 10px 10px 0 var(--yellow); }
+.filmato__btns { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.3rem; }
+.filmato__nota { margin-top: .9rem; max-width: 34rem; font-size: .92rem; line-height: 1.45; color: var(--muted); }
+@media (min-width: 860px) {
+  .filmato { grid-template-columns: minmax(0, 1fr) auto; column-gap: 4rem; align-items: center; }
+  .filmato__video { grid-column: 2; grid-row: 1 / span 2; width: 19rem; }
+  .filmato__testa { align-self: end; }
+  .filmato__resto { align-self: start; }
+}
