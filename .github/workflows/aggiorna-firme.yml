@@ -1,10 +1,9 @@
 name: Aggiorna il contatore delle firme
 
-# Due volte al giorno: verso le 8:10 e le 16:10, ora italiana (orario invernale).
+# Ogni mezz'ora (ai minuti 7 e 37). La pagina viene ripubblicata solo se il numero o la data cambiano.
 on:
   schedule:
-    - cron: "10 7 * * *"
-    - cron: "10 15 * * *"
+    - cron: "7,37 * * * *"
   workflow_dispatch:
 
 permissions:
