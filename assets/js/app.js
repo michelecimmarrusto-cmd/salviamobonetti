@@ -34,6 +34,14 @@
     scrivi(".js-frase-finale", "Abbiamo superato le " + numero(obiettivo) + " firme. Più siamo, più contiamo: firma anche tu.");
   }
 
+  // l'ultimo centinaio superato diventa un'etichetta al posto di "Obiettivo 1.000 firme"
+  var occhiello = document.querySelector(".meter__eyebrow");
+  var centinaio = Math.floor(firme / 100) * 100;
+  if (occhiello && centinaio >= 100) {
+    occhiello.textContent = "Superate le " + numero(centinaio) + " firme";
+    occhiello.classList.add("meter__eyebrow--festa");
+  }
+
   // La quota (firme / obiettivo) serve anche alle altre figure dell'avanzamento:
   // la punta dell'anello, l'anellino della barra in basso, la barra della chiusura.
   radice.style.setProperty("--quota", quota.toFixed(4));

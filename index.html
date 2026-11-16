@@ -89,9 +89,16 @@
       <div class="ring">
         <svg viewBox="0 0 240 240" role="img" aria-labelledby="ring-t">
           <title id="ring-t">699 firme raccolte su 1.000</title>
-          <circle class="ring__track" cx="120" cy="120" r="104"/>
-          <circle class="ring__bar" cx="120" cy="120" r="104" stroke-dasharray="653.45" stroke-dashoffset="196.69" transform="rotate(-90 120 120)"/>
+          <defs>
+            <linearGradient id="anello-oro" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE27A"/><stop offset=".5" stop-color="#F4C84C"/><stop offset="1" stop-color="#F2A531"/></linearGradient>
+            <pattern id="anello-retino" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="#2A4863"/><rect width="2.6" height="8" fill="#3A5A78"/></pattern>
+          </defs>
+          <circle class="ring__track" cx="120" cy="120" r="104" style="stroke:url(#anello-retino) #2A4863"/>
+          <circle class="ring__bar" cx="120" cy="120" r="104" stroke-dasharray="653.45" stroke-dashoffset="196.69" transform="rotate(-90 120 120)" style="stroke:url(#anello-oro) #F4C84C"/>
+          <circle class="ring__luce" cx="120" cy="120" r="104" transform="rotate(-90 120 120)"/>
           <circle class="ring__gaps" cx="120" cy="120" r="104" stroke-dasharray="3.4 61.945" transform="rotate(-90.94 120 120)"/>
+          <g class="ring__meta" aria-hidden="true"><path d="M120 11V-15"/><path class="ring__bandiera" d="M121.5-15h19l-5.5 6.5 5.5 6.5h-19z"/></g>
+          <g class="ring__stelle" aria-hidden="true"><g transform="translate(215 34)"><path d="M0-9 2.2-2.2 9 0 2.2 2.2 0 9-2.2 2.2-9 0-2.2-2.2z"/></g><g transform="translate(24 214)"><path d="M0-7 1.7-1.7 7 0 1.7 1.7 0 7-1.7 1.7-7 0-1.7-1.7z"/></g><g transform="translate(226 198)"><path d="M0-5 1.3-1.3 5 0 1.3 1.3 0 5-1.3 1.3-5 0-1.3-1.3z"/></g></g>
           <g class="ring__tip"><circle class="ring__halo" cx="120" cy="16" r="9"/><circle class="ring__cap" cx="120" cy="16" r="9"/><circle class="ring__dot" cx="120" cy="16" r="4.4"/></g>
         </svg>
         <div class="ring__num">
