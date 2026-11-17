@@ -32,6 +32,7 @@
     radice.classList.add("raggiunto");
     scrivi(".js-frase-contatore", "Obiettivo raggiunto!");
     scrivi(".js-frase-finale", "Abbiamo superato le " + numero(obiettivo) + " firme. Più siamo, più contiamo: firma anche tu.");
+    scrivi(".js-frase-record", "L'obiettivo delle " + numero(obiettivo) + " firme è raggiunto: più siamo, più contiamo.");
   }
 
   // l'ultimo centinaio superato diventa un'etichetta al posto di "Obiettivo 1.000 firme"
@@ -201,11 +202,31 @@
     }
   }
 
+  // ---- i numeri del risultato salgono quando entrano nello schermo ----
+  var conti = document.querySelectorAll("[data-conta]");
+  if (conti.length && !fermo && "IntersectionObserver" in window && window.requestAnimationFrame) {
+    var vedetta = new IntersectionObserver(function (voci) {
+      voci.forEach(function (v) {
+        if (!v.isIntersecting) return;
+        vedetta.unobserve(v.target);
+        var el = v.target, arrivoN = parseInt(el.getAttribute("data-conta"), 10) || 0, t0 = null;
+        var sali = function (ora) {
+          if (t0 === null) t0 = ora;
+          var k = Math.min((ora - t0) / 1300, 1);
+          el.textContent = numero(Math.round(arrivoN * (1 - Math.pow(1 - k, 3))));
+          if (k < 1) requestAnimationFrame(sali);
+        };
+        requestAnimationFrame(sali);
+      });
+    }, { threshold: 0.6 });
+    conti.forEach(function (el) { vedetta.observe(el); });
+  }
+
   // ---- comparsa morbida allo scorrimento ----
   if (!fermo && "IntersectionObserver" in window) {
     var pezzi = Array.prototype.slice.call(document.querySelectorAll(
       ".sheet, .timeline li, .zeros__grid li, .story li, .spent, .reasons li, .quote blockquote, .asks li, " +
-      ".steps li, .signbox, .share__btns, .flyer, .news, .faq details, .goal"));
+      ".steps li, .signbox, .share__btns, .flyer, .news, .faq details, .goal, .record__numeri li"));
     var mostra = function (el) {
       if (el.classList.contains("in")) return;
       el.addEventListener("transitionend", function fine(e) {
