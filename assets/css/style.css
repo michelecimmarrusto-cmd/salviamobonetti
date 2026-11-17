@@ -1095,3 +1095,11 @@ h1 { animation: titolo .75s var(--ease) backwards; }
 /* l'ultimo centinaio superato (lo scrive app.js al posto di "Obiettivo 1.000 firme") */
 .meter .meter__eyebrow--festa { display: flex; align-items: center; gap: .45em; width: -webkit-fit-content; width: fit-content; justify-self: start; margin: 0 auto 6px 0; padding: .42em .8em .36em .7em; border-radius: 99px; background: var(--yellow); color: var(--navy); letter-spacing: .07em; white-space: nowrap; animation: adesivo .7s var(--ease) 1.5s backwards; }
 .meter .meter__eyebrow--festa::before { content: ""; flex: none; width: .95em; height: .95em; background: var(--coral-deep); -webkit-clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+
+/* ---------- video dentro una notizia ---------- */
+
+.news__video { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; margin: .9rem 0 1rem; }
+.news__video figure { margin: 0; }
+.news__video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 2px solid var(--navy); border-radius: 14px; background: var(--navy); }
+.news__video figcaption { margin-top: .5rem; font-size: .92rem; line-height: 1.4; }
+.news .news__fonte { font-size: .84rem; color: var(--muted); }
