@@ -1103,3 +1103,4 @@ h1 { animation: titolo .75s var(--ease) backwards; }
 .news__video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 2px solid var(--navy); border-radius: 14px; background: var(--navy); }
 .news__video figcaption { margin-top: .5rem; font-size: .92rem; line-height: 1.4; }
 .news .news__fonte { font-size: .84rem; color: var(--muted); }
+.news__links { list-style: none; margin: .2rem 0 .7rem; padding: 0; display: grid; gap: .1rem; }
