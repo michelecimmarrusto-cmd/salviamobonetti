@@ -26,6 +26,14 @@
   scrivi(".js-mancano", numero(mancano));
   if (aggiornato) scrivi(".js-aggiornato", aggiornato);
 
+  // giorni dall'apertura della petizione e media di firme al giorno (fascia "Il risultato fin qui")
+  var apertura = (cfg.apertura || "2026-11-11").split("-").map(Number);
+  var adesso = new Date();
+  var giorniAperta = Math.max(Math.round((Date.UTC(adesso.getFullYear(), adesso.getMonth(), adesso.getDate()) -
+    Date.UTC(apertura[0], apertura[1] - 1, apertura[2])) / 86400000), 1);
+  scrivi(".js-giorni", String(giorniAperta));
+  scrivi(".js-media", numero(Math.round(firme / giorniAperta)));
+
   // obiettivo raggiunto: le frasi "ne mancano" lasciano il posto a un invito a continuare
   if (firme >= 1000) radice.classList.add("mille");   // quattro cifre nell'anello: un filo più piccole
   if (mancano === 0) {
@@ -209,7 +217,7 @@
       voci.forEach(function (v) {
         if (!v.isIntersecting) return;
         vedetta.unobserve(v.target);
-        var el = v.target, arrivoN = parseInt(el.getAttribute("data-conta"), 10) || 0, t0 = null;
+        var el = v.target, arrivoN = parseInt((el.textContent || "").replace(/\D/g, ""), 10) || 0, t0 = null;
         var sali = function (ora) {
           if (t0 === null) t0 = ora;
           var k = Math.min((ora - t0) / 1300, 1);

@@ -8,7 +8,7 @@ Esce con errore, senza toccare nulla, se non riesce a leggere un numero credibil
 import re
 import sys
 import urllib.request
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -17,6 +17,7 @@ PAGINA = Path(__file__).resolve().parent.parent / "index.html"
 MESI = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio",
         "agosto", "settembre", "ottobre", "novembre", "dicembre"]
 GIRO = 653.45  # circonferenza dell'anello (raggio 104)
+APERTURA = "2026-11-11"  # giorno di apertura della petizione (in index.html: data-apertura)
 
 
 def punti(n: int) -> str:
@@ -55,6 +56,10 @@ def main() -> None:
     oggi = datetime.now(ZoneInfo("Europe/Rome"))
     data = f"{oggi.day} {MESI[oggi.month - 1]} {oggi.year}"
     mancano = max(obiettivo - firme, 0)
+    inizio = re.search(r'data-apertura="(\d{4}-\d{2}-\d{2})"', pagina)
+    anno, mese, giorno = (int(x) for x in (inizio.group(1) if inizio else APERTURA).split("-"))
+    giorni = max((oggi.date() - date(anno, mese, giorno)).days, 1)
+    media = int(firme / giorni + 0.5)  # come Math.round nella pagina
     scostamento = GIRO * (1 - min(firme / obiettivo, 1))
 
     sostituzioni = [
@@ -68,6 +73,8 @@ def main() -> None:
         (r'(<title id="ring-t">)[^<]*(</title>)',
          rf"\g<1>{punti(firme)} firme raccolte su {punti(obiettivo)}\g<2>"),
         (r'stroke-dashoffset="[\d.]+"', f'stroke-dashoffset="{scostamento:.2f}"'),
+        (r'(class="js-giorni">)[^<]*(<)', rf"\g<1>{giorni}\g<2>"),
+        (r'(class="js-media">)[^<]*(<)', rf"\g<1>{punti(media)}\g<2>"),
     ]
     nuova = pagina
     for modello, valore in sostituzioni:
