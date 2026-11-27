@@ -1125,3 +1125,41 @@ h1 { animation: titolo .75s var(--ease) backwards; }
   .record__numeri li:first-child { box-shadow: 8px 8px 0 var(--coral); }
   .record__testo { font-size: 1.16rem; }
 }
+
+/* ---------- avviso in cima: l'ultima notizia importante ---------- */
+
+.con-avviso { --top-h: 100px; }
+.avviso { display: flex; align-items: center; justify-content: center; gap: .6rem; min-height: 44px; padding: .35rem 14px; background: var(--coral-dark); color: var(--cream); text-decoration: none; font-weight: 700; font-size: clamp(.8rem, 3.55vw, .95rem); line-height: 1.2; --focus: var(--yellow); }
+.avviso__tag { flex: none; background: var(--yellow); color: var(--navy); border-radius: 999px; padding: .16rem .6rem .18rem; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
+.avviso__lungo { display: none; }
+.avviso__go { transition: transform .18s var(--ease); }
+@media (hover: hover) {
+  .avviso:hover .avviso__go { transform: translateX(4px); }
+  .avviso:hover .avviso__txt { text-decoration: underline; text-underline-offset: 3px; }
+}
+@media (min-width: 700px) { .avviso__corto { display: none; } .avviso__lungo { display: inline; } }
+@media (min-width: 980px) { .con-avviso { --top-h: 116px; } }
+
+/* ---------- in evidenza: le otto domande dopo la commissione ---------- */
+
+.evid { position: relative; overflow: hidden; margin-top: clamp(1.2rem, 3vw, 2rem); background: var(--coral-dark); color: var(--cream); --focus: var(--yellow); --mark: var(--yellow); }
+.evid::after { content: "?"; position: absolute; right: -.04em; top: -.2em; font-family: var(--display); font-weight: 800; font-stretch: 75%; font-size: clamp(14rem, 58vw, 32rem); line-height: 1; color: var(--cream); opacity: .09; pointer-events: none; }
+.evid > .wrap { position: relative; z-index: 1; display: grid; gap: 1.7rem; }
+.evid .eyebrow { color: var(--yellow); }
+.evid h2 { max-width: 11em; }
+.evid h2 em { display: block; font-style: normal; color: var(--yellow); }
+.evid__som { max-width: 36rem; margin-top: .95rem; font-size: 1.1rem; line-height: 1.5; }
+.evid .btn { margin-top: 1.35rem; width: calc(100% - 4px); background: var(--yellow); color: var(--navy); }
+.evid__coppie { display: grid; gap: .8rem; }
+.evid__coppia { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.evid__c { display: grid; gap: .4rem; align-content: start; border: 2.5px solid var(--navy); border-radius: 18px; padding: .8rem .8rem .95rem; overflow-wrap: anywhere; }
+.evid__c--a { background: var(--cream); color: var(--navy); }
+.evid__c--b { background: var(--navy); color: var(--cream); box-shadow: 4px 4px 0 var(--yellow); }
+.evid__et { font-size: .64rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--coral-deep); }
+.evid__c--b .evid__et { color: var(--yellow); }
+.evid__c strong { font-family: var(--display); font-weight: 800; font-stretch: 82%; font-size: clamp(.98rem, 4.3vw, 1.45rem); line-height: 1.1; }
+@media (min-width: 900px) {
+  .evid > .wrap { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: 3.2rem; }
+  .evid .btn { width: auto; }
+  .evid__c { padding: 1.1rem 1.1rem 1.25rem; border-radius: 22px; }
+}
